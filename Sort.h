@@ -1,16 +1,14 @@
-//
-// Created by Fengyuan on 2022/5/16.
-//
 
-#ifndef ADDS_PRAC7_SORT_H
-#define ADDS_PRAC7_SORT_H
+
+#ifndef SORT_H
+#define SORT_H
 
 #include <vector>
 
-
 class Sort {
+public:
    virtual  std::vector<int> sort(std::vector<int> list)=0;
 };
 
 
-#endif //ADDS_PRAC7_SORT_H
+#endif 

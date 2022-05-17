@@ -1,28 +1,37 @@
-//
-// Created by Fengyuan on 2022/5/16.
-//
 
+  // REFERENCE FROM https://www.geeksforgeeks.org/
+   
+    
 #include "QuickSort.h"
 #include <vector>
 using namespace std;
+
+
 int partition(int *arr, int start, int end)
 {
-    // REFERENCE FROM https://www.geeksforgeeks.org/
+
     int pivot = arr[start];
-    int count = 0;
+
+    int counter = 0;
+
     for (int i = start + 1; i <= end; i++) {
+
         if (arr[i] <= pivot)
-            count++;
+
+            counter++;
     }
 
     // Giving pivot element its correct position
-    int pivotIndex = start + count;
-    swap(arr[pivotIndex], arr[start]);
 
-    // Sorting left and right parts of the pivot element
-    int i = start, j = end;
+    int pivotPosition = start + counter;
 
-    while (i < pivotIndex && j > pivotIndex) {
+    swap(arr[pivotPosition], arr[start]);
+
+
+    int i = start;
+    int j = end;
+
+    while (i < pivotPosition && j > pivotPosition) {
 
         while (arr[i] <= pivot) {
             i++;
@@ -32,31 +41,34 @@ int partition(int *arr, int start, int end)
             j--;
         }
 
-        if (i < pivotIndex && j > pivotIndex) {
+        if (i < pivotPosition && j > pivotPosition) {
             swap(arr[i++], arr[j--]);
         }
     }
 
-    return pivotIndex;
+    return pivotPosition;
 }
 
-void sortHelper(int *arr, int begin, int end)
+void qsHelper(int *arr, int begin, int end)
 {
-    // REFERENCE FROM https://www.geeksforgeeks.org/
-    // base
+  
+
     if (begin >= end)
         return;
     // partitioning the array
     int p = partition(arr, begin, end);
 
     // left part
-    sortHelper(arr, begin, p - 1);
+
+    qsHelper(arr, begin,  p - 1);
 
     // right part
-    sortHelper(arr, p + 1, end);
+    qsHelper(arr, p + 1, end);
 }
 
 std::vector<int> QuickSort::sort(std::vector<int> list) {
-    sortHelper(list.data(),0,list.size()-1);
+
+    qsHelper(list.data(), 0, list.size()-1);
+
     return list;
 }
